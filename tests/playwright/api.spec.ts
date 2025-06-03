@@ -16,12 +16,12 @@ test.describe('API Endpoints', () => {
       status: 'open',
     };
 
-    const createResponse = await apiContext.post('/bugs', { data: newBug });
+    const createResponse = await apiContext.post('/api/bugs', { data: newBug });
     expect(createResponse.ok()).toBeTruthy();
     const createdBug = await createResponse.json();
     expect(createdBug.title).toBe(newBug.title);
 
-    const getResponse = await apiContext.get(`/bugs/${createdBug.id}`);
+    const getResponse = await apiContext.get(`/api/bugs/${createdBug.id}`);
     expect(getResponse.ok()).toBeTruthy();
     const fetchedBug = await getResponse.json();
     expect(fetchedBug.id).toBe(createdBug.id);
@@ -35,12 +35,12 @@ test.describe('API Endpoints', () => {
       expectedResult: 'Expected outcome',
     };
 
-    const createResponse = await apiContext.post('/testcases', { data: newTestCase });
+    const createResponse = await apiContext.post('/api/testcases', { data: newTestCase });
     expect(createResponse.ok()).toBeTruthy();
     const createdTestCase = await createResponse.json();
     expect(createdTestCase.title).toBe(newTestCase.title);
 
-    const getResponse = await apiContext.get(`/testcases/${createdTestCase.id}`);
+    const getResponse = await apiContext.get(`/api/testcases/${createdTestCase.id}`);
     expect(getResponse.ok()).toBeTruthy();
     const fetchedTestCase = await getResponse.json();
     expect(fetchedTestCase.id).toBe(createdTestCase.id);
