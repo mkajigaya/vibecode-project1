@@ -37,7 +37,7 @@ jobs:
         env:
           BASE_URL: http://localhost:3000
 
-      # - name: 📊 Run k6 Load Test
-      #   run: |
-      #     npm install -g k6
-      #     k6 run tests/k6/loadTest.js
+      - name: 📊 Run k6 Load Test
+        run: |
+          npm install -g k6
+          k6 run tests/k6/loadTest.js
