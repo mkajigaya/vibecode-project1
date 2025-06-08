@@ -24,10 +24,10 @@ jobs:
       - name: Build project
         run: npm run build
 
-      # - name: Run Playwright tests
-      #   run: |
-      #     npx playwright install
-      #     npx playwright test
+      - name: Run Playwright tests
+        run: |
+          npx playwright install
+          npx playwright test
 
       # - name: Install k6
       #   run: |
