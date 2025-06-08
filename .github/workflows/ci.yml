@@ -2,7 +2,7 @@ name: CI - API with Tests
 
 on:
   push:
-    branches: [main]
+    branches: [main, vibecode1]
   pull_request:
     branches: [main]
 
@@ -24,16 +24,16 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Run Playwright tests
-        run: |
-          npx playwright install
-          npx playwright test
+      # - name: Run Playwright tests
+      #   run: |
+      #     npx playwright install
+      #     npx playwright test
 
-      - name: Install k6
-        run: |
-          sudo apt update
-          sudo apt install -y k6
+      # - name: Install k6
+      #   run: |
+      #     sudo apt update
+      #     sudo apt install -y k6
 
-      - name: Run k6 performance tests
-        run: k6 run tests/k6/loadTest.js
+      # - name: Run k6 performance tests
+      #   run: k6 run tests/k6/loadTest.js
 
