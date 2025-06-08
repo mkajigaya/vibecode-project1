@@ -1,7 +1,7 @@
 import express from 'express';
-import bugRoutes from './routes/bugs';
-import testCaseRoutes from './routes/testcases';
-import healthRoute from './routes/health'; // ✅ Import
+import bugRoutes from './routes/bug.routes';
+import testCaseRoutes from './routes/testCase.routes';
+import healthRoute from './routes/health.routes'; // ✅ Import
 
 const app = express();
 const PORT = process.env.PORT || 3000;
