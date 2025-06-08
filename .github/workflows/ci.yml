@@ -2,7 +2,7 @@ name: CI - API with Tests
 
 on:
   push:
-    branches: [main, vibecode1]
+    branches: [main, playwright-tests]
   pull_request:
     branches: [main]
 
