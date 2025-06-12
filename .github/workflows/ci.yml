@@ -2,7 +2,7 @@ name: CI - API with Tests
 
 on:
   push:
-    branches: [main, vibecode1]
+    branches: [main, playwright-tests]
   pull_request:
     branches: [main]
 
@@ -24,16 +24,36 @@ jobs:
       - name: Build project
         run: npm run build
 
-      # - name: Run Playwright tests
-      #   run: |
-      #     npx playwright install
-      #     npx playwright test
+      - name: Start API server
+        run: |
+          nohup node dist/server.js > server.log 2>&1 &
+          sleep 5
+
+      - name: Run Playwright tests
+        run: |
+          npx playwright install
+          npx playwright test
+      
+      - name: Install k6
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gnupg software-properties-common curl
+          sudo mkdir -m 0755 -p /etc/apt/keyrings
+          curl -fsSL https://dl.k6.io/key.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/k6-archive-keyring.gpg
+          echo "deb [signed-by=/etc/apt/keyrings/k6-archive-keyring.gpg] https://dl.k6.io/deb stable main" | sudo tee /etc/apt/sources.list.d/k6.list
+          sudo apt-get update
+          sudo apt-get install -y k6
 
       # - name: Install k6
       #   run: |
-      #     sudo apt update
-      #     sudo apt install -y k6
+      #     sudo apt-get update
+      #     sudo apt-get install -y gnupg software-properties-common curl
+      #     sudo mkdir -m 0755 -p /etc/apt/keyrings
+      #     curl -fsSL https://dl.k6.io/key.gpg | sudo tee /etc/apt/keyrings/k6-archive-keyring.gpg > /dev/null
+      #     echo "deb [signed-by=/etc/apt/keyrings/k6-archive-keyring.gpg] https://dl.k6.io/deb stable main" | sudo tee /etc/apt/sources.list.d/k6.list
+      #     sudo apt-get update
+      #     sudo apt-get install -y k6
 
-      # - name: Run k6 performance tests
-      #   run: k6 run tests/k6/loadTest.js
+      - name: Run k6 performance tests
+        run: k6 run tests/k6/loadTest.js
 
